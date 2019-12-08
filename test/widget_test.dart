@@ -9,22 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_dust/main.dart';
+import 'package:http/http.dart' as http;
 
+// 데이터를 잘 가져오는지 확인하는 테스트 코드.
+// 옆에 초록색 삼각형 클릭하면 확인 가능!!
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  test('http 통신 테스트', () async {
+    var response = await http.get('https://api.airvisual.com/v2/nearest_city?key=1164b7b9-e98f-4971-8a48-94a31ada783a');
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(response.statusCode, 200);
   });
 }
