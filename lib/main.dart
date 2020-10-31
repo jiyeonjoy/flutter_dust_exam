@@ -122,17 +122,19 @@ class _MainState extends State<Main> {
             // 모서리 둥글레 해주는 위젯
             ClipRRect(
               borderRadius: BorderRadius.circular(30),
-              child: RaisedButton(
+              child: Container(
                 padding: const EdgeInsets.symmetric(
                     vertical: 15.0, horizontal: 50),
                 color: Colors.orange,
-                child: Icon(
-                  Icons.refresh,
-                  color: Colors.white,
+                child: InkWell(
+                  child: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ),
+                  onTap: () {
+                    airBloc.fetch();
+                  },
                 ),
-                onPressed: () {
-                  airBloc.fetch();
-                },
               ),
             )
           ],
